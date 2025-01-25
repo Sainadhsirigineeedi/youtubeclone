@@ -8,10 +8,6 @@ import Navbar from './components/Navbar'
 import { Provider } from 'react-redux'
 import appStore from './utils/appStore'
 
-
-
-
-
 const approutes=createBrowserRouter([
       {
          path:'/',
