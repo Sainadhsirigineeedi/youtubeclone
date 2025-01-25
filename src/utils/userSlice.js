@@ -4,15 +4,15 @@ import { createSlice } from "@reduxjs/toolkit";
 const userSlice=createSlice({
 name:'userSlice',
  initialState:{
-    userData:[]
+    isSidebar:false
  },
  reducers:{
-     addUserdata:(state,action)=>{
-           state.userData=action.payload
+    sideBartoggle:(state,action)=>{
+         state.isSidebar = !state.isSidebar
      }
  }
 })
 
-export const {addUserdata}=userSlice.actions;
+export const {sideBartoggle}=userSlice.actions;
 
 export default userSlice.reducer
