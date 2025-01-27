@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Sidebar from './Sidebar'
 import Maincontainer from './Maincontainer'
 import { useSelector } from 'react-redux'
+import Smallside from './Smallside'
 
 
 const Home = () => {
@@ -13,7 +14,7 @@ const Home = () => {
   return (
     <div className='flex'>
      {
-      isSidebar?<Sidebar></Sidebar>:<div></div>
+      isSidebar?<Sidebar></Sidebar>:<Smallside></Smallside>
      }
      <Maincontainer></Maincontainer>
         

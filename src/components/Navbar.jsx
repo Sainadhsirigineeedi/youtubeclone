@@ -7,7 +7,7 @@ const Navbar = () => {
   const dispatch=useDispatch()
   const navigate=useNavigate()
   return (
-    <div className="navbar shadow-lg">
+    <div className="navbar shadow-lg ">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle"onClick={()=>{dispatch(sideBartoggle())}}>
@@ -48,14 +48,7 @@ const Navbar = () => {
       </div>
       <ul
         tabIndex={0}
-        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-        <li>
-          <a className="justify-between">
-            Profile
-            <span className="badge">New</span>
-          </a>
-        </li>
-        <li><a>Settings</a></li>
+        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow bg-slate-700">
         <li><a>Logout</a></li>
       </ul>
     </div>

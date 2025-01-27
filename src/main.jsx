@@ -7,6 +7,8 @@ import Home from './components/Home'
 import Navbar from './components/Navbar'
 import { Provider } from 'react-redux'
 import appStore from './utils/appStore'
+import Maincontainer from './components/Maincontainer'
+import Playingvideo from './components/Playingvideo'
 
 const approutes=createBrowserRouter([
       {
@@ -15,12 +17,13 @@ const approutes=createBrowserRouter([
          children:[
             {
               path:'/',
-              element:<Home></Home>
+              element:<Maincontainer></Maincontainer>
             },
             {
-              path:'/navbar',
-              element:<Navbar></Navbar>
+               path:'/video/:id',
+               element:<Playingvideo></Playingvideo>
             }
+            
          ]
       } 
 ])

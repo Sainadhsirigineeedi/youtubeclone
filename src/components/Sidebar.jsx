@@ -2,7 +2,7 @@ import React from 'react';
 
 const Sidebar = () => {
   return (
-    <div className="w-48 h-screen shadow-md overflow-y-scroll">
+    <div className="w-48 h-screen shadow-md">
       <div className="p-2">
         <ul>
           <li>i Home</li>
