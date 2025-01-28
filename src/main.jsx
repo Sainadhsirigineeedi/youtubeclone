@@ -20,7 +20,7 @@ const approutes=createBrowserRouter([
               element:<Maincontainer></Maincontainer>
             },
             {
-               path:'/video/:id',
+               path:'/palyvideo/:id',
                element:<Playingvideo></Playingvideo>
             }
             

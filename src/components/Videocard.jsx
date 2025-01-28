@@ -1,13 +1,19 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Videocard = (props) => {
   const videodetails = props.videodetails;
   const { snippet ,statistics} = videodetails;
   const thumbnailUrl = snippet?.thumbnails?.maxres?.url;
   console.log(videodetails)
+  const navigate=useNavigate();
 
   return thumbnailUrl? (
-    <div className="m-2 border rounded-lg w-48 hover:cursor-pointer overflow-hidden shadow-lg transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl">
+    <div className="m-2 border rounded-lg w-48 hover:cursor-pointer 
+    overflow-hidden shadow-lg transform transition duration-300 ease-in-out hover:scale-105 
+    hover:shadow-xl" 
+    onClick={()=>navigate(`/palyvideo/${videodetails?.id}`)}
+    >
   
   <img 
     src={thumbnailUrl} 

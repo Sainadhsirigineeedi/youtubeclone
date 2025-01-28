@@ -10,7 +10,8 @@ const Navbar = () => {
     <div className="navbar shadow-lg ">
   <div className="navbar-start">
     <div className="dropdown">
-      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle"onClick={()=>{dispatch(sideBartoggle())}}>
+      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle"
+      onClick={()=>{dispatch(sideBartoggle())}}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5"
