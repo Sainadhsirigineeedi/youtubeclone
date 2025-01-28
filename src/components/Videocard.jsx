@@ -5,7 +5,7 @@ const Videocard = (props) => {
   const videodetails = props.videodetails;
   const { snippet ,statistics} = videodetails;
   const thumbnailUrl = snippet?.thumbnails?.maxres?.url;
-  console.log(videodetails)
+ 
   const navigate=useNavigate();
 
   return thumbnailUrl? (
