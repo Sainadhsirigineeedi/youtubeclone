@@ -7,6 +7,9 @@ import { closeSidebar } from '../utils/userSlice';
 const Playingvideo = () => {
   const dispatch=useDispatch()
   const {id}=useParams();
+  const moviedata=()=>{
+          console.log(data)
+  }
   
   useEffect(()=>{
        dispatch(closeSidebar()) 
