@@ -1,37 +1,71 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Videocard = (props) => {
-  const videodetails = props.videodetails;
-  const { snippet ,statistics} = videodetails;
-  const thumbnailUrl = snippet?.thumbnails?.maxres?.url;
- 
-  const navigate=useNavigate();
+const Videocard = ({ videodetails }) => {
+  const { snippet, statistics } = videodetails;
+  const thumbnailUrl = snippet?.thumbnails?.maxres?.url || snippet?.thumbnails?.high?.url;
+  const navigate = useNavigate();
 
-  return thumbnailUrl? (
-    <div className="m-2 border rounded-lg w-48 hover:cursor-pointer 
-    overflow-hidden shadow-lg transform transition duration-300 ease-in-out hover:scale-105 
-    hover:shadow-xl" 
-    onClick={()=>navigate(`/palyvideo/${videodetails?.id}`)}
+  const formatViewCount = (count) => {
+    if (!count) return '0 views';
+    if (count >= 1000000) {
+      return `${(count / 1000000).toFixed(1)}M views`;
+    }
+    if (count >= 1000) {
+      return `${(count / 1000).toFixed(1)}K views`;
+    }
+    return `${count} views`;
+  };
+
+  if (!thumbnailUrl) return null;
+
+  return (
+    <div 
+      className="w-full cursor-pointer group"
+      onClick={() => navigate(`/palyvideo/${videodetails?.id}`)}
     >
-  
-  <img 
-    src={thumbnailUrl} 
-    alt="Video Thumbnail" 
-    className="w-full h-32 object-cover rounded-t-lg" 
-  />
+      {/* Thumbnail Container */}
+      <div className="relative aspect-video w-full overflow-hidden rounded-xl">
+        <img 
+          src={thumbnailUrl} 
+          alt={snippet?.title}
+          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-200"
+        />
+      </div>
 
- 
-  <ul className="p-3">
-    <li className="text-sm font-semibold text-gray-800 line-clamp-2">
-           {snippet?.title}
-    </li>
-    <li className="text-sm text-gray-600">{snippet?.channelTitle}</li>
-    <li className="text-xs text-gray-400 mt-1">{statistics?.viewCount} views</li>
-  </ul>
-</div>
+      {/* Video Info Container */}
+      <div className="mt-3 flex gap-3">
+        {/* Channel Avatar */}
+        <div className="flex-shrink-0">
+          <div className="h-9 w-9 rounded-full overflow-hidden">
+            <img 
+              src={snippet?.thumbnails?.default?.url} 
+              alt={snippet?.channelTitle}
+              className="h-full w-full object-cover"
+            />
+          </div>
+        </div>
 
-  ):(null)
+        {/* Title and Meta Info */}
+        <div className="flex flex-col">
+          <h3 className="font-roboto font-medium text-sm line-clamp-2 text-gray-900">
+            {snippet?.title}
+          </h3>
+          
+          <div className="mt-1 flex flex-col text-sm text-gray-600">
+            <span className="hover:text-gray-900">
+              {snippet?.channelTitle}
+            </span>
+            <div className="flex items-center">
+              <span>{formatViewCount(statistics?.viewCount)}</span>
+              <span className="mx-1">•</span>
+              <span>{new Date(snippet?.publishedAt).toLocaleDateString()}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Videocard;

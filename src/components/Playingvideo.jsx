@@ -31,7 +31,7 @@ const Playingvideo = () => {
   const { title, channelTitle, description } = videoInfo[0]?.snippet;
   const { commentCount, favoriteCount, likeCount, viewCount } = videoInfo[0]?.statistics;
 
-  const truncatedDescription = description?.length > 150 ? description.substring(0, 150) + '...' : description;
+  const truncatedDescription = description?.length > 150 ? description.substring(0, 100) + '...' : description;
 
   return (
     <div className="flex flex-wrap gap-6 p-6">

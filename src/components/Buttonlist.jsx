@@ -3,7 +3,7 @@ import React from 'react'
 const Buttonlist = () => {
   const arrButtons=["ALL","NEW","OLD","TELUGU","HINDI","PODCASTS","JAVASCRIPT","GAMING","ALL","NEW","OLD","TELUGU","HINDI","PODCASTS","JAVASCRIPT","GAMING"]
   return (
-    <div className='m-1 w-screen flex overflow-x-scroll h-20 '>
+    <div className='m-5 w-screen flex overflow-x-scroll h-20 '>
         {
             arrButtons.map((name,index)=>{
                 return(
