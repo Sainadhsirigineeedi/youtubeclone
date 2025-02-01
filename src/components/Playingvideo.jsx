@@ -23,7 +23,7 @@ const Playingvideo = () => {
   }, []);
 const videoDetails = async () => {
     try {
-      const response = await axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${id}&key=${process.env.API_KEY}`);
+      const response = await axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${id}&key=${import.meta.env.VITE_YOUTUBE_API_KEY}`);
       setVideoInfo(response?.data?.items);
       const commentsresponse=await axios.get(`https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&videoId=${id}&key=${import.meta.env.VITE_YOUTUBE_API_KEY}`);
       setComments(commentsresponse?.data?.items);
