@@ -7,28 +7,28 @@ const Sidebar = () => {
   const menuItems = {
     main: [
       {  label: 'Home', path: '/' },
-      { icon: '📱', label: 'Shorts', path: '/shorts' },
-      { icon: '📺', label: 'Subscriptions', path: '/subscriptions' },
+      { icon: '📱', label: 'Shorts', },
+      { icon: '📺', label: 'Subscriptions', },
     ],
     personal: [
-      { icon: '📚', label: 'Library', path: '/library' },
-      { icon: '⏱️', label: 'History', path: '/history' },
-      { icon: '🎬', label: 'Your Videos', path: '/your-videos' },
-      { icon: '⏰', label: 'Watch Later', path: '/watch-later' },
-      { icon: '👍', label: 'Liked Videos', path: '/liked' },
+      { icon: '📚', label: 'Library',},
+      { icon: '⏱️', label: 'History',},
+      { icon: '🎬', label: 'Your Videos',},
+      { icon: '⏰', label: 'Watch Later', },
+      { icon: '👍', label: 'Liked Videos',},
     ],
     subscriptions: [
-      { icon: '📺', label: 'E TV', path: '/channel/etv' },
-      { icon: '📺', label: 'Maa TV', path: '/channel/maatv' },
-      { icon: '📺', label: 'TV 9', path: '/channel/tv9' },
-      { icon: '📺', label: 'News', path: '/channel/news' },
+      { icon: '📺', label: 'E TV', },
+      { icon: '📺', label: 'Maa TV',},
+      { icon: '📺', label: 'TV 9',},
+      { icon: '📺', label: 'News',},
     ],
   };
 
   const MenuItem = ({ icon, label, path }) => (
     <li>
       <button
-        // onClick={() => navigate(path)}
+      
         className="flex items-center w-[100] px-3 py-2 text-sm rounded-lg hover:bg-gray-100 transition-colors"
       >
         
@@ -38,7 +38,7 @@ const Sidebar = () => {
   );
 
   const MenuSection = ({ title, items }) => (
-    <div className="mb-4">
+    <div className="mb-4 px-1">
       {title && (
         <h3 className="px-3 py-2 text-sm font-medium text-gray-700">
           {title}
@@ -53,7 +53,7 @@ const Sidebar = () => {
   );
 
   return (
-    <div className="w-64 h-[calc(100vh-56px)] overflow-y-auto bg-white py-3 flex flex-col ">
+    <div className="w-64 h-[calc(100vh-56px)] overflow-y-auto bg-white py-3 flex flex-col  ">
       <MenuSection items={menuItems.main} />
       
       <div className="border-t border-gray-200 my-2" />
@@ -67,7 +67,7 @@ const Sidebar = () => {
       <div className="border-t border-gray-200 my-2" />
       
       <div className="px-4 py-3 text-xs text-gray-500">
-        <p>About Press Copyright</p>
+        <p>About Press Copyright sainadh</p>
         <p>Contact us Creators</p>
         <p>Advertise Developers</p>
         <p className="mt-4">© 2024 Google LLC</p>
