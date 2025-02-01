@@ -1,8 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Videocard = ({ videodetails }) => {
-  const { snippet, statistics } = videodetails;
+const Videocard = ({ videodetails,searchlistvideodetails}) => {
+  
+  const { snippet, statistics } = videodetails || searchlistvideodetails;
+ 
   const thumbnailUrl = snippet?.thumbnails?.maxres?.url || snippet?.thumbnails?.high?.url;
   const navigate = useNavigate();
 
@@ -22,9 +24,9 @@ const Videocard = ({ videodetails }) => {
   return (
     <div 
       className="w-full cursor-pointer group"
-      onClick={() => navigate(`/palyvideo/${videodetails?.id}`)}
+      onClick={() => navigate(`/palyvideo/${videodetails?.id || searchlistvideodetails?.id?.videoId }`)}
     >
-      {/* Thumbnail Container */}
+      
       <div className="relative aspect-video w-full overflow-hidden rounded-xl">
         <img 
           src={thumbnailUrl} 
@@ -33,20 +35,20 @@ const Videocard = ({ videodetails }) => {
         />
       </div>
 
-      {/* Video Info Container */}
+     
       <div className="mt-3 flex gap-3">
-        {/* Channel Avatar */}
+       
         <div className="flex-shrink-0">
           <div className="h-9 w-9 rounded-full overflow-hidden">
             <img 
-              src={snippet?.thumbnails?.default?.url} 
+              src={snippet?.thumbnails?.default?.url } 
               alt={snippet?.channelTitle}
               className="h-full w-full object-cover"
             />
           </div>
         </div>
 
-        {/* Title and Meta Info */}
+     
         <div className="flex flex-col">
           <h3 className="font-roboto font-medium text-sm line-clamp-2 text-gray-900">
             {snippet?.title}
@@ -57,8 +59,8 @@ const Videocard = ({ videodetails }) => {
               {snippet?.channelTitle}
             </span>
             <div className="flex items-center">
-              <span>{formatViewCount(statistics?.viewCount)}</span>
-              <span className="mx-1">•</span>
+              {videodetails && <span>{formatViewCount(statistics?.viewCount)}</span>}
+              {videodetails && <span className="mx-1">•</span>}
               <span>{new Date(snippet?.publishedAt).toLocaleDateString()}</span>
             </div>
           </div>

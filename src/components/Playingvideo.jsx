@@ -1,24 +1,34 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { closeSidebar } from '../utils/userSlice';
 import axios from 'axios';
+import Comment from './Comment';
+import Videocard from './Videocard';
+
 
 const Playingvideo = () => {
+  const morevideos=useSelector((store)=>store.app.morevideos);
+  
   const dispatch = useDispatch();
   const { id } = useParams();
   const [videoInfo, setVideoInfo] = useState([]);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
-
-  useEffect(() => {
+  const [showComments,setShowComments]=useState(true);
+  const [comments,setComments]=useState([])
+ 
+ useEffect(() => {
     dispatch(closeSidebar());
     videoDetails();
   }, []);
-
-  const videoDetails = async () => {
+const videoDetails = async () => {
     try {
-      const response = await axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${id}&key=${import.meta.env.VITE_YOUTUBE_API_KEY}`);
+      const response = await axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${id}&key=${process.env.API_KEY}`);
       setVideoInfo(response?.data?.items);
+      const commentsresponse=await axios.get(`https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&videoId=${id}&key=${import.meta.env.VITE_YOUTUBE_API_KEY}`);
+      setComments(commentsresponse?.data?.items);
+      
+   
     } catch (error) {
       console.log(error);
     }
@@ -29,6 +39,7 @@ const Playingvideo = () => {
   }
 
   const { title, channelTitle, description } = videoInfo[0]?.snippet;
+ 
   const { commentCount, favoriteCount, likeCount, viewCount } = videoInfo[0]?.statistics;
 
   const truncatedDescription = description?.length > 150 ? description.substring(0, 100) + '...' : description;
@@ -71,22 +82,45 @@ const Playingvideo = () => {
               </button>
             </p>
           </div>
+
+          <div className='border p-4 rounded-xl '>
+           <div className='flex justify-between'>
+           <h1 className='font-bold text-xl'>comments</h1>
+           <button
+           onClick={()=>{setShowComments(!showComments)}}
+           >{">"}</button>
+           </div>
+           {
+            showComments && <div className='px-4'>
+             
+             {
+              comments.map((comment)=>{
+                  return(
+                    <Comment singleComment={comment}></Comment>
+                  )
+              })
+             }
+          
+          </div>
+           }
+          </div>
+
         </div>
       </div>
 
       <div className="flex flex-col w-[300px]">
         <h2 className="text-xl font-bold mb-4">More Videos</h2>
         <div className="flex flex-col gap-4">
-          <div className="flex gap-2">
-            <img src="https://via.placeholder.com/100" alt="Thumbnail" className="w-24 h-14 object-cover" />
-            <div>
-              <h3 className="text-md font-semibold">Video Title</h3>
-              <p className="text-sm text-gray-500">Channel Name</p>
-            </div>
+        {morevideos.map((video) => (
+          <div key={video.id} className="w-full">
+            
+            <Videocard videodetails={video} />
+          </div>
+        ))}
           </div>
         </div>
       </div>
-    </div>
+
   );
 };
 

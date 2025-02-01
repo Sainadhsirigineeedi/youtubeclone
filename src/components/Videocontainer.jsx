@@ -2,15 +2,19 @@ import React, { useEffect, useState } from 'react';
 import Videocard from './Videocard';
 import axios from 'axios';
 import { YOUTUBEAPI } from '../constants';
+import { useDispatch } from 'react-redux';
+import { adddataMorevideos } from '../utils/userSlice';
 
 const Videocontainer = () => {
   const [videos, setVideos] = useState([]);
+ 
 
   const getVideosData = async () => {
     try {
       const response = await axios.get(YOUTUBEAPI);
-      const data = response.data.items;
+      const data = response?.data?.items;
       setVideos(data);
+     
     } catch (error) {
       console.log(error);
     }
@@ -18,6 +22,7 @@ const Videocontainer = () => {
 
   useEffect(() => {
     getVideosData();
+    
   }, []);
 
   return (
@@ -25,6 +30,7 @@ const Videocontainer = () => {
       <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-6">
         {videos.map((video) => (
           <div key={video.id} className="w-full">
+            
             <Videocard videodetails={video} />
           </div>
         ))}

@@ -53,7 +53,7 @@ const Sidebar = () => {
   );
 
   return (
-    <div className="w-64 h-[calc(100vh-56px)] overflow-y-auto bg-white py-3 flex flex-col">
+    <div className="w-64 h-[calc(100vh-56px)] overflow-y-auto bg-white py-3 flex flex-col ">
       <MenuSection items={menuItems.main} />
       
       <div className="border-t border-gray-200 my-2" />

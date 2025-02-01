@@ -9,6 +9,7 @@ import { Provider } from 'react-redux'
 import appStore from './utils/appStore'
 import Maincontainer from './components/Maincontainer'
 import Playingvideo from './components/Playingvideo'
+import Searchlist from './components/Searchlist'
 
 const approutes=createBrowserRouter([
       {
@@ -22,6 +23,10 @@ const approutes=createBrowserRouter([
             {
                path:'/palyvideo/:id',
                element:<Playingvideo></Playingvideo>
+            },
+            {
+               path:'/searchvideo/:keyword',
+               element:<Searchlist></Searchlist>
             }
             
          ]

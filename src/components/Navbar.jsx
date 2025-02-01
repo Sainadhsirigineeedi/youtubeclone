@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { sideBartoggle } from '../utils/userSlice';
+import {  sideBartoggle } from '../utils/userSlice';
 import { SEARCH_API } from '../constants';
 import axios from 'axios';
 
@@ -17,6 +17,7 @@ const Navbar = () => {
 }, [query]);
 
   const getSearchResults = async () => {
+   
       const response = await axios.get(SEARCH_API + query);
       setSearchResults(response?.data[1]);
    
@@ -61,7 +62,7 @@ const Navbar = () => {
           `}>
             {showSearch && (
               <button 
-                onClick={() => setShowSearch(false)}
+                
                 className="mr-4 md:hidden"
                 aria-label="Close Search"
               >
@@ -79,9 +80,18 @@ const Navbar = () => {
                   className="w-full focus:outline-none text-sm"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
+                  onBlur={()=>{setTimeout(()=>{
+                  setQuery("")
+                  },500)}}
+                 
+                 
                 />
               </div>
               <button 
+              
+              onClick={() => {
+                navigate(`/searchvideo/${query}`)
+              }}
                 className="px-6 py-2 bg-gray-100 border border-l-0 rounded-r-full hover:bg-gray-200"
                 aria-label="Search"
               >
@@ -93,9 +103,22 @@ const Navbar = () => {
 
             
             {searchResults.length > 0 && (
-              <div className="absolute top-full left-0 right-0 bg-white mt-1 shadow-lg rounded-lg max-h-[calc(100vh-80px)] overflow-y-auto mx-4">
+              <div className="absolute top-full left-0 right-0 bg-white mt-1 shadow-lg rounded-lg max-h-[calc(100vh-80px)] overflow-y-auto mx-4
+              "
+              
+              >
                 {searchResults.map((result, index) => (
                   <button
+                    onClick={()=>{
+                     
+                     navigate(`/searchvideo/${result}`);
+                    
+                     
+                    
+
+                                 
+                  }}
+                  
                     key={index}
                     className="w-full px-4 py-2 text-left hover:bg-gray-100 flex items-center gap-3 text-sm"
                     

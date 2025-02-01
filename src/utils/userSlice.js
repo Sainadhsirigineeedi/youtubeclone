@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { act } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 
 const userSlice=createSlice({
 name:'userSlice',
  initialState:{
-    isSidebar:false
+    isSidebar:false,
+    morevideos:[]
  },
  reducers:{
     sideBartoggle:(state,action)=>{
@@ -13,10 +15,13 @@ name:'userSlice',
      },
      closeSidebar:(state,action)=>{
         state.isSidebar=false;
+     },
+     adddataMorevideos:(state,action)=>{
+           state.morevideos=action.payload
      }
  }
 })
 
-export const {sideBartoggle,closeSidebar}=userSlice.actions;
+export const {sideBartoggle,closeSidebar,adddataMorevideos}=userSlice.actions;
 
 export default userSlice.reducer

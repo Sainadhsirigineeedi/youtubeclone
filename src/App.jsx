@@ -1,12 +1,31 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import './App.css';
+import { adddataMorevideos } from './utils/userSlice';
+import axios from 'axios';
+import { useEffect } from 'react';
+import { YOUTUBEAPI } from './constants';
+
+
 
 function App() {
   const isSidebar = useSelector((store) => store.app.isSidebar);
-
+   const dispatch=useDispatch();
+  useEffect(()=>{
+    getVideosData()
+  })
+  const getVideosData = async () => {
+    try {
+      const response = await axios.get(YOUTUBEAPI);
+      const data = response?.data?.items;
+      const data1=data.slice(0,9)
+      dispatch(adddataMorevideos(data1))
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="min-h-screen bg-white">
       
